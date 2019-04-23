@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -20,22 +21,16 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postIndex;
 
+    private String username;
     private String title;
     private String comment;
-    private String attachedPath;
-    private String attachedName;
+
+    private List<Attachment> pictures;
 
     @CreationTimestamp
     private LocalDateTime created;
     @UpdateTimestamp
     private LocalDateTime updated;
-
-    public Post(String title, String comment, String attachedPath, String attachedName) {
-        this.title = title;
-        this.comment = comment;
-        this.attachedPath = attachedPath;
-        this.attachedName = attachedName;
-    }
 
     public Post(String title, String content) {
         this.title = title;

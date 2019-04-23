@@ -20,6 +20,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public Post getPost(String username){
+        return this.postRepository.findTopByUsernameOrderByPostIndexDesc(username).orElse(null);
+    }
+
+    @Override
     public Post addPost(Post post) {
         return this.postRepository.save(post);
     }
@@ -36,8 +41,7 @@ public class PostServiceImpl implements PostService {
             Post p = found.get();
             p.setTitle(post.getTitle());
             p.setComment(post.getComment());
-            p.setAttachedName(post.getAttachedName());
-            p.setAttachedPath(post.getAttachedPath());
+            p.setPictures(post.getPictures());
             return this.postRepository.save(p);
         } else {
             return null;
